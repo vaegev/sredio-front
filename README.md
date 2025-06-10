@@ -54,6 +54,31 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
+## Tailwind CSS
+
+This project uses [Tailwind CSS](https://tailwindcss.com/) for styling. Tailwind is a utility-first CSS framework that allows for rapid UI development.
+
+### Configuration
+
+Tailwind CSS is configured in the following files:
+
+- `tailwind.config.js`: Contains the Tailwind configuration, including content paths, theme extensions, and plugins.
+- `postcss.config.js`: Configures PostCSS to use Tailwind CSS and Autoprefixer.
+- `src/styles.css`: Includes the Tailwind directives (@tailwind base, @tailwind components, @tailwind utilities).
+
+### Usage
+
+You can use Tailwind utility classes directly in your HTML templates. For example:
+
+```html
+<div class="p-4 bg-blue-100 rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold text-gray-800">Hello, Tailwind!</h1>
+  <p class="mt-2 text-gray-600">This is styled using Tailwind CSS utility classes.</p>
+</div>
+```
+
+For more information on using Tailwind CSS, visit the [Tailwind CSS Documentation](https://tailwindcss.com/docs).
+
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

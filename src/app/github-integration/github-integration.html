@@ -1,0 +1,37 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      GitHub Integration
+      @if (isConnected) {
+        <mat-icon color="primary">check_circle</mat-icon>
+      }
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  @if (!isConnected) {
+
+    <div>
+      <p>Connect your GitHub account to access repositories and data.</p>
+      <button mat-raised-button color="primary" (click)="connectGitHub()">
+        Connect GitHub
+      </button>
+    </div>
+  }
+
+  @if (isConnected) {
+
+    <div>
+      <p>Connected since: {{ connectedDate | date }}</p>
+      <button mat-raised-button color="warn" (click)="removeIntegration()">
+        Remove Integration
+      </button>
+    </div>
+    <div>
+      <p>Connected since: {{ connectedDate | date }}</p>
+      <button mat-raised-button color="primary" (click)="redirect()">
+        Redirect to Data
+      </button>
+    </div>
+  }
+</mat-expansion-panel>
+
