@@ -6,7 +6,7 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {AgGridAngular} from 'ag-grid-angular';
 import {Router} from '@angular/router';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
-import {catchError, distinctUntilChanged, Subject, takeUntil} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, Subject, takeUntil} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -99,6 +99,7 @@ export class DataViewComponent implements OnInit, OnDestroy {
       }
     });
     this.form.get('search')?.valueChanges.pipe(
+      debounceTime(500),
       takeUntil(this.unsubscribeAll),
       distinctUntilChanged()
     ).subscribe({
