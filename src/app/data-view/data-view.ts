@@ -55,6 +55,7 @@ export class DataViewComponent implements OnInit, OnDestroy {
     entity: [''],
     organization: [''],
     repository: [''],
+    search: [''],
   });
   unsubscribeAll: Subject<void> = new Subject();
   orgs = toSignal(this.githubService.fetchGitHubOrgs().pipe(catchError((err) => {
@@ -97,6 +98,14 @@ export class DataViewComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.form.get('search')?.valueChanges.pipe(
+      takeUntil(this.unsubscribeAll),
+      distinctUntilChanged()
+    ).subscribe({
+      next: search => {
+        this.onSearch(search);
+      }
+    })
   }
 
   private loadRepoData(org: string, repo: string) {
@@ -127,10 +136,9 @@ export class DataViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSearch(event: Event) {
-    const searchText = (event.target as HTMLInputElement).value;
+  onSearch(txt: string | null) {
     if (this.gridApi) {
-      this.gridApi.setGridOption('quickFilterText', searchText);
+      this.gridApi.setGridOption('quickFilterText', txt || undefined);
     }
   }
 }
