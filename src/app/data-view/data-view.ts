@@ -59,7 +59,9 @@ export class DataViewComponent implements OnInit, OnDestroy {
   });
   unsubscribeAll: Subject<void> = new Subject();
   orgs = toSignal(this.githubService.fetchGitHubOrgs().pipe(catchError((err) => {
-    this.router.navigate(['/integration-success'])
+    if (err.status === 401) {
+      this.router.navigate(['/integration-success'])
+    }
     return [];
   })));
   repos: WritableSignal<any> = signal([]);
